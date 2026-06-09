@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>adam panchito</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./main.css">
+    <!-- <script src="./ini.js"></script> -->
+     <p id="json" style="display: none;"></p>
+  </head>
+
+  <body>
+
+    <!-- Página antes del archivo-->
+    <div id="pre_insert" style="text-align: center">
+
+      <p style="display: block">Introduce tu archivo data.json:</p>
+      <input type="file" id="jsonFile" accept=".json" onchange="cargarJson(event)">
+      <script src="./archivo.js"></script>
+
+    </div>
+
+    <!-- Página después del archivo -->
+    <div id="post_insert" style="text-align: center; display:none">
+       
+        <h1 id="contador">Prueba</h1>
+        
+        <input type="button" value="Reiniciar contador" id="reset">
+        <script src="./reset.js"></script>
+        <img src="./tung.webp" style="display: flex; margin: auto; padding-top: 15px;">
+
+    </div>
+
+    <!-- Historial -->
+    <div id="div_historial" style="display: none;">
+      <p>Historial de incidentes:</p>
+      <ol id="historial">
+
+
+      </ol>
+    </div>
+
+    <!-- Footer -->
+    <footer style="position: sticky; display: none">
+      <ul>
+        <li><p id="fecha_actual"> Fecha actual: </p></li>
+        <script>
+
+        </script>
+        <li><p id="fecha_incidente"> Fecha del último incidente: </p></li>
+      </ul>
+    </footer>
+  </body>
+</html>
+
+<!-- 
+
+notas:
+  uso de mailto: en <a> para evitar posibles desmadres al resetear el contador 
+  
+-->

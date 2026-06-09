@@ -20,13 +20,17 @@ reset.onclick = function(){
         if (fecha == "")
             fecha = parseFecha(new Date());
 
+        //Tras manejo de entradas del usuario, convertimos la fecha de nuevo a un objeto Date
+        fecha = parseDate(fecha);
+
+        alert(fecha)
+
         data[`incidente${getNumUltimoIncidente(data)+1}`] = creaIncidente(fecha, descripcion);
         data.ultimo_incidente = data[`incidente${getNumUltimoIncidente(data)}`];
         if (data.ultimo_incidente === null)
             throw new ErrorPorCancelacion();
 
-        alert("Copia el siguiente texto y guárdalo en un archivo de texto llamado data.json, y súbelo al discord");
-        alert(JSON.stringify(data));
+        descargarJSON(data);
 
         //Añadir entrada al historial
         let entrada = document.createElement("li");
@@ -38,7 +42,7 @@ reset.onclick = function(){
         if (e instanceof ErrorPorCancelacion)
             alert("Proceso cancelado.");
         else
-            console.error(e)      
+            console.error(e);   
     }
 }
 
@@ -61,4 +65,27 @@ function creaIncidente(f, d){
 function parseFecha(fecha){
     let date = new Date(fecha);
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+}
+
+function parseDate(fecha){
+    let tabla = fecha.trim().split("/");
+    alert(tabla)
+    return new Date(`${tabla[2]}-${tabla[1]}-${tabla[0]}T00:00:00.000+02:00`);
+}
+
+function descargarJSON(objeto, nombreArchivo = "data.json") {
+  const json = JSON.stringify(objeto, null, 2);
+
+  const blob = new Blob([json], {
+    type: "application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const enlace = document.createElement("a");
+  enlace.href = url;
+  enlace.download = nombreArchivo;
+  enlace.click();
+
+  URL.revokeObjectURL(url);
 }

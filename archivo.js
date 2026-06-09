@@ -51,6 +51,7 @@ function imprimeHistorial(data){
     for (let key in data){
         if (key != "ultimo_incidente"){
             let entrada = document.createElement("li");
+            entrada.className = "elemento_historial";
             historial.append(entrada);
             entrada.innerHTML = data[key].descripcion;
         }

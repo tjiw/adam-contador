@@ -1,6 +1,6 @@
 class ErrorPorCancelacion extends Error{
     constructor(mensaje){
-        super(mensaje)
+        super(mensaje);
     }
 }
 
@@ -9,12 +9,18 @@ reset.onclick = function(){
         let contador = document.getElementById("contador");
         let data = JSON.parse(document.getElementById("json").innerHTML);
         let historial = document.getElementById("historial");
+        let ultimo_incidente = document.getElementById("fecha_incidente");
         
         //Actualiza contador
         contador.innerHTML = "Días desde que Adam se volvió a dejar en ridículo: 0";
 
         //Actualiza JSON
-        data[`incidente${getNumUltimoIncidente(data)+1}`] = creaIncidente(new Date(), prompt("Describe el incidente"));
+        let descripcion = prompt("Describe el incidente");
+        let fecha = prompt("Introduce la fecha del incidente en la forma dd/mm/aaaa hh:mm (opcional, por defecto es la fecha actual)", parseFecha(new Date()));
+        if (fecha == "")
+            fecha = parseFecha(new Date());
+
+        data[`incidente${getNumUltimoIncidente(data)+1}`] = creaIncidente(fecha, descripcion);
         data.ultimo_incidente = data[`incidente${getNumUltimoIncidente(data)}`];
         if (data.ultimo_incidente === null)
             throw new ErrorPorCancelacion();
@@ -25,6 +31,7 @@ reset.onclick = function(){
         //Añadir entrada al historial
         let entrada = document.createElement("li");
         entrada.innerHTML = data.ultimo_incidente.descripcion;
+        entrada.className = "elemento_historial";
         historial.append(entrada);
     }
     catch (e){
@@ -32,7 +39,7 @@ reset.onclick = function(){
             alert("Proceso cancelado.");
         else
             console.error(e)      
-    }    
+    }
 }
 
 function getNumUltimoIncidente(obj){
@@ -49,4 +56,9 @@ function creaIncidente(f, d){
             fecha: f,
             descripcion: d
         }
+}
+
+function parseFecha(fecha){
+    let date = new Date(fecha);
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 }

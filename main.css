@@ -3,3 +3,15 @@ a:visited {
     color: blue
 
 }
+
+body{
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.elemento_historial{
+
+    padding-bottom: 8px;
+
+}

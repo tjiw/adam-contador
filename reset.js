@@ -1,3 +1,5 @@
+"use strict";
+
 class ErrorPorCancelacion extends Error{
     constructor(mensaje){
         super(mensaje);
@@ -22,7 +24,7 @@ reset.onclick = function(){
 
         //Tras manejo de entradas del usuario, convertimos la fecha de nuevo a un objeto Date
         fecha = parseDate(fecha);
-        ultimo_incidente.innerHTML = `Fecha del último incidente: ${parseFecha(fecha)}`
+        ultimo_incidente.innerHTML = `Fecha del último incidente: ${parseFecha(fecha)}`;
 
         data[`incidente${getNumUltimoIncidente(data)+1}`] = creaIncidente(fecha, descripcion);
         data.ultimo_incidente = data[`incidente${getNumUltimoIncidente(data)}`];

@@ -22,8 +22,7 @@ reset.onclick = function(){
 
         //Tras manejo de entradas del usuario, convertimos la fecha de nuevo a un objeto Date
         fecha = parseDate(fecha);
-
-        alert(fecha)
+        ultimo_incidente.innerHTML = `Fecha del último incidente: ${parseFecha(fecha)}`
 
         data[`incidente${getNumUltimoIncidente(data)+1}`] = creaIncidente(fecha, descripcion);
         data.ultimo_incidente = data[`incidente${getNumUltimoIncidente(data)}`];
@@ -64,13 +63,12 @@ function creaIncidente(f, d){
 
 function parseFecha(fecha){
     let date = new Date(fecha);
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
 }
 
 function parseDate(fecha){
     let tabla = fecha.trim().split("/");
-    alert(tabla)
-    return new Date(`${tabla[2]}-${tabla[1]}-${tabla[0]}T00:00:00.000+02:00`);
+    return new Date(`${tabla[2]}-${tabla[1]}-${tabla[0]}`);
 }
 
 function descargarJSON(objeto, nombreArchivo = "data.json") {

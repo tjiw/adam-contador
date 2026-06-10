@@ -38,12 +38,12 @@ function procesa(data){
 
 function parseFecha(fecha){
     let date = new Date(fecha);
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
 }
 
 function restaFechas(fechaMayor, fechaMenor){
-    let diferencia = fechaMayor.getTime() - fechaMenor.getTime();
-    return (new Date(diferencia).getDay());
+    let diferencia = Math.abs(fechaMayor.getTime() - fechaMenor.getTime());
+    return (new Date(diferencia).getDate());
 }
 
 function imprimeHistorial(data){

@@ -1,3 +1,5 @@
+"use strict";
+
 async function cargarJson(evento){
     const file = evento.target.files[0];
 
@@ -33,7 +35,7 @@ function procesa(data){
     fecha_actual.innerHTML = `Fecha actual: ${parseFecha(new Date())}`;
     fecha_incidente.innerHTML = `Fecha del último incidente: ${parseFecha(data.ultimo_incidente.fecha)}`;
 
-    contador.innerHTML = `Días desde que Adam se volvió a dejar en ridículo: ${restaFechas(new Date(), new Date(data.ultimo_incidente.fecha))}`
+    contador.innerHTML = `Días desde que Adam se volvió a dejar en ridículo: ${restaFechas(new Date(), new Date(data.ultimo_incidente.fecha))}`;
 }
 
 function parseFecha(fecha){

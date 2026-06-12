@@ -1,5 +1,3 @@
-"use strict";
-
 class ErrorPorCancelacion extends Error{
     constructor(mensaje){
         super(mensaje);
@@ -12,19 +10,22 @@ reset.onclick = function(){
         let data = JSON.parse(document.getElementById("json").innerHTML);
         let historial = document.getElementById("historial");
         let ultimo_incidente = document.getElementById("fecha_incidente");
-        
-        //Actualiza contador
-        contador.innerHTML = "Días desde que Adam se volvió a dejar en ridículo: 0";
 
         //Actualiza JSON
         let descripcion = prompt("Describe el incidente");
+        if (descripcion === null)
+            throw new ErrorPorCancelacion();
+        
         let fecha = prompt("Introduce la fecha del incidente en la forma dd/mm/aaaa hh:mm (opcional, por defecto es la fecha actual)", parseFecha(new Date()));
         if (fecha == "")
             fecha = parseFecha(new Date());
 
         //Tras manejo de entradas del usuario, convertimos la fecha de nuevo a un objeto Date
         fecha = parseDate(fecha);
-        ultimo_incidente.innerHTML = `Fecha del último incidente: ${parseFecha(fecha)}`;
+        ultimo_incidente.innerHTML = `Fecha del último incidente: ${parseFecha(fecha)}`
+        
+        //Actualiza contador
+        contador.innerHTML = "Días desde que Adam se volvió a dejar en ridículo: 0";
 
         data[`incidente${getNumUltimoIncidente(data)+1}`] = creaIncidente(fecha, descripcion);
         data.ultimo_incidente = data[`incidente${getNumUltimoIncidente(data)}`];
